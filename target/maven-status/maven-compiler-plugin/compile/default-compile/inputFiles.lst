@@ -6,7 +6,6 @@ d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\m
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\dto\Ipolicy_cursorJpaDto.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\model\CaCustomerRequest.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\entity\HouseEntity.java
-d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\dto\IUpdatePolicy5JpaDto.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\Lgupdb01.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\jpa\IUpdatePolicy4Jpa.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\model\Db2InIntegers.java
@@ -16,9 +15,7 @@ d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\m
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\jpa\IUpdateEndowment2Jpa.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\model\ErrorMsg.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\jpa\ISelectPolicyLastChangedJpa.java
-d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\dto\IUpdateEndowment2JpaDto.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\entity\MotorEntity.java
-d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\dto\IUpdateHouse2JpaDto.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\entity\EndowmentEntity.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\jpa\IUpdateHouse2Jpa.java
 d:\BLUESCRIPT_DEMO\End-2-EndTestData\JavaMicroservices\Policy\lgupdb01_SBT\src\main\java\com\bluescript\demo\model\CaMotor.java
