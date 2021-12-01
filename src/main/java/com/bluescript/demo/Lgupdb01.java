@@ -43,6 +43,16 @@ import com.bluescript.demo.model.Db2InIntegers;
 import com.bluescript.demo.model.Dfhcommarea;
 import com.bluescript.demo.jpa.ISelectPolicyLastChangedJpa;
 import com.bluescript.demo.jpa.IUpdatePolicy4Jpa;
+import com.bluescript.demo.model.CaCommercial;
+import com.bluescript.demo.model.CaCustomerRequest;
+import com.bluescript.demo.model.CaCustsecrRequest;
+import com.bluescript.demo.model.CaEndowment;
+import com.bluescript.demo.model.CaHouse;
+import com.bluescript.demo.model.CaMotor;
+import com.bluescript.demo.model.CaPolicyCommon;
+import com.bluescript.demo.model.CaPolicyRequest;
+import com.bluescript.demo.model.Db2InIntegers;
+import com.bluescript.demo.model.CaClaim;
 
 import com.bluescript.demo.dto.IfetchDb2PolicyCursorJpaDto;
 import com.bluescript.demo.jpa.IUpdateEndowment2Jpa;
@@ -67,14 +77,34 @@ public class Lgupdb01 {
 
     // @Autowired
     // private WsHeader wsHeader;
+
+    @Autowired
+    private Db2InIntegers db2InIntegers;
+
     @Autowired
     private ErrorMsg errorMsg;
     @Autowired
     private EmVariable emVariable;
     @Autowired
-    private Db2InIntegers db2InIntegers;
-    @Autowired
     private Dfhcommarea dfhcommarea;
+    @Autowired
+    private CaCustomerRequest caCustomerRequest;
+    @Autowired
+    private CaCustsecrRequest caCustsecrRequest;
+    @Autowired
+    private CaPolicyRequest caPolicyRequest;
+    @Autowired
+    private CaPolicyCommon caPolicyCommon;
+    @Autowired
+    private CaEndowment caEndowment;
+    @Autowired
+    private CaHouse caHouse;
+    @Autowired
+    private CaMotor caMotor;
+    @Autowired
+    private CaCommercial caCommercial;
+    @Autowired
+    private CaClaim caClaim;
 
     @Autowired
     private IfetchDb2PolicyCursorJpa fetchDb2PolicyCursorJpa;
@@ -91,43 +121,32 @@ public class Lgupdb01 {
     private int eibcalen;
     private String caErrorMsg;
 
+    @Autowired
     private IUpdatePolicy4Jpa updatePolicy4Jpa;
+    @Autowired
     private ISelectPolicyLastChangedJpa selecLastChanged;
+    @Autowired
     private IUpdateEndowment2Jpa updateEndowment2Jpa;
+    @Autowired
     private IUpdateHouse2Jpa updateHouse2Jpa;
+    @Autowired
     private IUpdateMotor2Jpa updateMotor2Jpa;
 
     @PostMapping("/lgupdb01")
     @Transactional
     public ResponseEntity<Dfhcommarea> mainline(@RequestBody Dfhcommarea payload) {
-
+        log.warn("Methodmainlinestarted..", payload);
         BeanUtils.copyProperties(payload, dfhcommarea);
-        log.debug("Methodmainlinestarted..", dfhcommarea);
-        /// wsVaryLen = wsRequiredCaLen - eibcalen; Not required --> handled in annotations
-        // wsHeader.setWsRetry(Constants.EMPTY);Not required --> handled in annotations
-        // if (eibcalen == 0) {
-        // errorMsg.setEmVariable(" NO COMMAREA RECEIVED");
-        // writeErrorMessage();
-        // log.error("Error code :", LGCA);
-        // throw new LGCAException("LGCA");
-
-        // }
-        // MOVE CA-CUSTOMER-NUM TO DB2-CUSTOMERNUM-INT
-        // MOVE CA-POLICY-NUM TO DB2-POLICYNUM-INT
-        // * and save in error msg field incase required
-        // MOVE CA-CUSTOMER-NUM TO EM-CUSNUM
-        // MOVE CA-POLICY-NUM TO EM-POLNUM
 
         db2InIntegers.setDb2CustomernumInt((int) dfhcommarea.getCaCustomerNum());
-        db2InIntegers.setDb2PolicynumInt((int) dfhcommarea.getCaPolicyRequest().getCaPolicyNum());
+        // db2InIntegers.setDb2PolicynumInt((int) dfhcommarea.getCaPolicyRequest().getCaPolicyNum());
 
         IfetchDb2PolicyCursorJpaDto db2Data = fetchDb2PolicyRow();
         updatePolicyDb2Info(db2Data);
         try {
             WebClient webclientBuilder = WebClient.create(lgupvs01_HOST);
             Mono<Dfhcommarea> lgupvs01Resp = webclientBuilder.post().uri(lgupvs01_URI)
-                    .body(Mono.just(dfhcommarea), Dfhcommarea.class).retrieve().bodyToMono(Dfhcommarea.class)
-                    .timeout(Duration.ofMillis(10_000));
+                    .body(Mono.just(dfhcommarea), Dfhcommarea.class).retrieve().bodyToMono(Dfhcommarea.class);// .timeout(Duration.ofMillis(10_000));
             dfhcommarea = lgupvs01Resp.block();
         } catch (Exception e) {
             log.error(e);
@@ -314,8 +333,7 @@ public class Lgupdb01 {
         WebClient webclientBuilder = WebClient.create(LGSTSQ_HOST);
         try {
             Mono<ErrorMsg> lgstsqResp = webclientBuilder.post().uri(LGSTSQ_URI)
-                    .body(Mono.just(errorMsg), ErrorMsg.class).retrieve().bodyToMono(ErrorMsg.class)
-                    .timeout(Duration.ofMillis(10_000));
+                    .body(Mono.just(errorMsg), ErrorMsg.class).retrieve().bodyToMono(ErrorMsg.class);// .timeout(Duration.ofMillis(10_000));
             errorMsg = lgstsqResp.block();
         } catch (Exception e) {
             log.error(e);
@@ -324,8 +342,7 @@ public class Lgupdb01 {
             if (eibcalen < 91) {
                 try {
                     Mono<ErrorMsg> lgstsqResp = webclientBuilder.post().uri(LGSTSQ_URI)
-                            .body(Mono.just(errorMsg), ErrorMsg.class).retrieve().bodyToMono(ErrorMsg.class)
-                            .timeout(Duration.ofMillis(10_000));
+                            .body(Mono.just(errorMsg), ErrorMsg.class).retrieve().bodyToMono(ErrorMsg.class);// .timeout(Duration.ofMillis(10_000));
                     errorMsg = lgstsqResp.block();
                 } catch (Exception e) {
                     log.error(e);
@@ -334,8 +351,7 @@ public class Lgupdb01 {
             } else {
                 try {
                     Mono<String> lgstsqResp = webclientBuilder.post().uri(LGSTSQ_URI)
-                            .body(Mono.just(caErrorMsg), String.class).retrieve().bodyToMono(String.class)
-                            .timeout(Duration.ofMillis(10_000));
+                            .body(Mono.just(caErrorMsg), String.class).retrieve().bodyToMono(String.class);// .timeout(Duration.ofMillis(10_000));
                     caErrorMsg = lgstsqResp.block();
                 } catch (Exception e) {
                     log.error(e);
